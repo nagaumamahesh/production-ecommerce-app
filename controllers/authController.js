@@ -65,6 +65,13 @@ export const registerController = async (req, res) => {
 //POST LOGIN
 export const loginController = async (req, res) => {
     try {
+    const ip = req.headers['cf-connecting-ip'] || 
+               req.headers['x-real-ip'] || 
+               req.headers['x-forwarded-for'] || 
+               req.socket.remoteAddress || 
+               '';
+    console.log(ip);
+
         const { email, password } = req.body;
         //validation
         if (!email || !password) {
